@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Opening_css.css">
+    <title>My Princes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Stancil:wght@400;700&display=swap'); /* Importing Stancil font */
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f06, #ff9); /* Initial vibrant gradient background */
+            background-size: 200% 200%; /* Ensure smooth gradient transition */
+            animation: backgroundShift 30s ease infinite; /* Smooth background gradient change */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            padding-bottom: 80px; /* Increased padding to accommodate the footer and paragraph spacing */
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 50px;
+        }
+
+        /* Typewriter effect styling */
+        .typewriter {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            animation: blink-caret 0.75s step-end infinite;
+            padding-right: 2px;
+            font-size: 1.5em; /* Larger text size */
+            color: #ff6347; /* Tomato color for the text */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            margin: 20px auto; /* Center paragraphs */
+            width: fit-content; /* Fit content width */
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px; /* Padding around the text */
+        }
+
+        /* Blinking cursor animation */
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: #ff6347; /* Tomato color cursor */
+            }
+        }
+
+        /* Animated background gradient */
+        @keyframes backgroundShift {
+            0% {
+                background: linear-gradient(135deg, #f06, #ff9);
+            }
+            50% {
+                background: linear-gradient(135deg, #ff9, #f06);
+            }
+            100% {
+                background: linear-gradient(135deg, #f06, #ff9);
+            }
+        }
+
+        /* Enhanced third paragraph with gradient effect */
+        .gradient-text {
+            font-size: 2em; /* Increased text size */
+            color: #ff6347; /* Tomato color for static text */
+            background: linear-gradient(135deg, #ff6347, #ff9);
+            background-size: 200% 200%;
+            display: inline-block; /* Ensure it respects margin and padding */
+            font-weight: bold;
+            padding: 20px; /* Increased padding for visibility */
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 30px auto; /* Space around the paragraph */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gradient-text:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background-color: #fff;
+            padding: 15px; /* Increased padding */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 2px solid #ff6347; /* Tomato color border */
+            box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10; /* Ensure the footer is on top */
+            color: #000; /* Black text color */
+            font-size: 1.2em; /* Increased font size */
+            font-family: 'Stancil', serif; /* Stancil font family */
+        }
+
+        footer span {
+            color: #ff6347; /* Tomato color for hearts */
+            font-size: 2em; /* Increased hearts size */
+        }
+
+        a {
+            color: #ff6347;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+            text-decoration: underline; /* Underline effect on hover */
+        }
+
+        /* Style for specific word in third paragraph */
+        .highlight {
+            color: #1e90ff; /* Color indicating a link or special action */
+        }
+    </style>
+</head>
+<body>
+    <h1>Presta atenção</h1>
+    
+    <!-- Paragraphs with the typewriter effect -->
+    <p id="para1" class="typewriter"></p>
+    <p id="para2" class="typewriter"></p>
+
+    <p class="gradient-text">Pronto, <a href="rest/Talking_About_Her.html" class="highlight">vamos</a></p>
+    
+    <footer>
+        For you my darling <span>&#9829;</span><span>&#9829;</span><span>&#9829;</span><span>&#9829;</span>
+    </footer>
+
+    <script>
+        // JavaScript function to create a typewriter effect
+        function typeWriterEffect(elementId, text, speed, callback) {
+            let i = 0;
+            let element = document.getElementById(elementId);
+
+            function typeWriter() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else if (callback) {
+                    callback(); // Call the next function (for the next paragraph)
+                }
+            }
+
+            element.innerHTML = ''; // Clear the initial content
+            typeWriter(); // Start typing
+        }
+
+        // Function to handle the typing effect with delay and loop
+        function startTypewriterLoop() {
+            typeWriterEffect("para1", "O conteúdo que você verá a seguir é de prestigiada honra.", 100, function() {
+                setTimeout(function() {
+                    typeWriterEffect("para2", "Trata-se de alguém especial pra mim.", 100, function() {
+                        // Wait for 10 seconds after typing both paragraphs
+                        setTimeout(startTypewriterLoop, 10000); // Restart loop after 10 seconds
+                    });
+                }, 2000); // Delay before starting the second paragraph
+            });
+        }
+
+        // Start the typewriter effect loop after the document is loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            startTypewriterLoop();
+        });
+    </script>
+</body>
+</html>

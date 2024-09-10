@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="Pt-Mz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Princes</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 20px; /* Space between articles */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .article-box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Improved shadow */
+            padding: 20px;
+            flex: 1 1 calc(50% - 20px); /* Flex basis for responsiveness */
+            box-sizing: border-box;
+            height: auto; /* Auto height to fit content */
+            overflow: hidden; /* Hide scrollbars */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .article-box:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+            transform: translateY(-5px); /* Lift effect */
+        }
+
+        .article-box h2 {
+            position: sticky;
+            top: 0; /* Stick to the top of its container */
+            background: #f8f9fa; /* Light background for readability */
+            padding: 10px;
+            margin: 0; /* Remove margin to eliminate space */
+            border-bottom: 2px solid #007bff; /* Enhanced border */
+            z-index: 10; /* Ensure it's above the content */
+            width: 100%; /* Full width of the parent */
+            font-size: 1.5rem; /* Adjusted font size */
+        }
+
+        .first-paragraph {
+            text-align: center;
+            font-weight: bold;
+            font-size: 5vw; /* Responsive font size */
+            margin: 20px 0;
+            color: #007bff; /* Change color */
+            transition: text-shadow 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+            text-shadow: 
+                1px 1px 2px rgba(0, 0, 0, 0.3), 
+                -1px -1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .first-paragraph:hover {
+            text-shadow: 
+                1px 1px 2px rgba(255, 0, 0, 0.6), 
+                -1px -1px 2px rgba(0, 255, 255, 0.6);
+            color: #ff4500; /* Change color on hover */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        ul {
+            list-style: none; /* Remove default bullets */
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        li:last-child {
+            border-bottom: none; /* Remove border from last item */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: relative;
+            width: 100%;
+            font-size: 16px;
+            border-top: 1px solid #444;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Shadow for footer */
+        }
+
+        .fixed-text {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #f8f9fa;
+            padding: 10px;
+            border-bottom: 2px solid #007bff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 20;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Shadow for fixed text */
+        }
+
+        #text-span-1, #text-span-2 {
+            display: none; /* Hide initially */
+            font-weight: bold;
+            color: #007bff; /* Text color */
+        }
+
+        @media (max-width: 768px) {
+            .article-box {
+                flex: 1 1 100%; /* Stack articles on small screens */
+            }
+
+            .first-paragraph {
+                font-size: 7vw; /* Increase font size on small screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .first-paragraph {
+                font-size: 10vw; /* Increase font size further on very small screens */
+            }
+        }
+
+        aside {
+            display: flex; /* Use flexbox to align items side by side */
+            gap: 20px; /* Space between articles */
+            padding: 20px;
+            box-sizing: border-box;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        aside article {
+            flex: 1 1 calc(50% - 20px); /* Make articles take equal space */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px; /* Space below each article */
+            height: 200px; /* Set a fixed height for uniformity */
+            position: relative; /* Required for positioning the divider line */
+        }
+
+        aside .side-by-side {
+            display: flex; /* Use flexbox for side-by-side layout */
+            gap: 20px; /* Space between paragraphs */
+        }
+
+        aside .side-by-side p {
+            flex: 1; /* Allow paragraphs to take equal space */
+            margin: 0; /* Remove default margin */
+            padding: 20px;
+            background: #f9f9f9; /* Background color for paragraphs */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for paragraphs */
+            position: relative; /* Required for positioning the divider line */
+        }
+
+        aside .side-by-side p::after {
+            content: "";
+            position: absolute;
+            right: 0; /* Position the line to the right edge */
+            top: 0;
+            bottom: 0;
+            width: 2px; /* Line width */
+            background-color: #007bff; /* Line color */
+            height: 100%; /* Full height of the paragraph */
+        }
+
+        aside .side-by-side p:last-child::after {
+            display: none; /* Hide the line for the last paragraph */
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-text">
+        <span id="text-span-1">Q-U-A-L-I-D-A-D-E-S</span>
+        <span id="text-span-2">D-E-F-E-I-T-O-S</span>
+    </div>
+    <p class="first-paragraph" id="hover-text">4PT</p>
+    <div class="container">
+        <div class="article-box" id="box-1">
+            <article>
+                <h2>Qualidades</h2>
+                <ul>
+                    <li>Carinhosa</li>
+                    <li>Linda</li>
+                    <li>Atenciosa</li>
+                    <li>Conversadora</li>
+                    <li>Inteligente</li>
+                    <li>Boa em todos os sentidos</li>
+                    <li>Corajosa</li>
+                    <li>Recíproca</li>
+                </ul>
+            </article>
+        </div>
+        <div class="article-box" id="box-2">
+            <article>
+                <h2>Defeitos</h2>
+                <ul>
+                    <li>Zangona</li>
+                    <li>Sensível</li>
+                    <li>Obcecada pela perfeição</li>
+                    <li>Linda</li>
+                    <li>Atraente</li>
+                    <li>Vingativa</li>
+                    <li>Solteira</li>
+                    <li>Bullying</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+    <div style="padding: 20px;">
+        <p style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px;">
+            Apesar de todo o mal que as pessoas venham a falar dela, eu acho um diamante em pessoa. O seu brilho é o raiar de todas as manhãs, quando olho para seus olhos sinto uma sensação de ternura e alívio porque é nela que eu vejo a pessoa ideal para ser minha parceira e com ela triunfar sobre qualquer mal que nos venha a aparecer. Ela é simplesmente incrível.<br>Se amar fosse pecado eu teria uma pena de morte. Não sei se é exagero mas eu acho esplêndida.
+        </p>
+    </div>
+    <aside>
+        <div class="side-by-side">
+            <p>Ocupação:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Estudante</p>
+            <p>Jogos:<br>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Candy Crush</span><br>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Ludo King</span><br>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Temple Run</span><br>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-Uno</span>
+            </p>
+        </div>
+        <div class="side-by-side">
+            <p>Redes Sociais: <br><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TikTok</span></p>
+        </div>
+    </aside>
+    <footer>
+        De Marcos Matavel 2024 para minha pérola Tiziyana Matilde
+    </footer>
+    <script>
+        const paragraph = document.getElementById('hover-text');
+        const textSpan1 = document.getElementById('text-span-1');
+        const textSpan2 = document.getElementById('text-span-2');
+
+        paragraph.addEventListener('mouseover', () => {
+            paragraph.textContent = 'I love you';
+            paragraph.style.color = 'white';
+            paragraph.style.fontSize = '37px';
+        });
+
+        paragraph.addEventListener('mouseout', () => {
+            paragraph.textContent = '4PT';
+            paragraph.style.color = 'black';
+            paragraph.style.fontSize = '30px';
+        });
+
+        function updateFixedText() {
+            const scrollTop = window.scrollY;
+            const box1 = document.getElementById('box-1');
+            const box2 = document.getElementById('box-2');
+            const box1OffsetTop = box1.getBoundingClientRect().top + window.scrollY;
+            const box2OffsetTop = box2.getBoundingClientRect().top + window.scrollY;
+
+            if (scrollTop < box1OffsetTop + box1.offsetHeight && scrollTop >= box1OffsetTop) {
+                textSpan1.style.display = 'inline';
+                textSpan2.style.display = 'none';
+            } else if (scrollTop >= box2OffsetTop && scrollTop < box2OffsetTop + box2.offsetHeight) {
+                textSpan1.style.display = 'none';
+                textSpan2.style.display = 'inline';
+            } else {
+                textSpan1.style.display = 'none';
+                textSpan2.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', updateFixedText);
+        updateFixedText(); // Initialize the text display
+    </script>
+</body>
+</html>
